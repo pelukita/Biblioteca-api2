@@ -1,4 +1,5 @@
 <?php
+require_once 'app/controladores/LibroApiController.php';
 require_once 'libs/router/router.php';
 
 $router = new Router();
