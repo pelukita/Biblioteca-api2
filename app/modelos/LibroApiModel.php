@@ -16,4 +16,14 @@ class LibroApiModel
 
     return $Libros;
   }
+
+   public function getLibro($id)
+  {
+    $query = $this->db->prepare('SELECT * FROM libro  WHERE id = ?');
+    $query->execute([$id]);
+    $Libro = $query->fetchAll(PDO::FETCH_OBJ);
+
+    return $Libro;
+  }
+  
 }
