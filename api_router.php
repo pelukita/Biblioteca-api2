@@ -6,7 +6,9 @@ $router = new Router();
 
 $router->addRoute('libros',     'GET',  'LibroApiController', 'getLibros');
 $router->addRoute('libros/:id', 'GET',  'LibroApiController', 'getLibro');
-$router->addRoute('libros',     'POST', 'LibropiController', 'insertLibro');
+$router->addRoute('libros',     'POST', 'LibroApiController', 'insertLibro');
+
+$router->addRoute('libros/:id',     'DELETE', 'LibroApiController', 'deleteLibro');
 
 $router->addRoute('fichas',     'GET',  'FichaApiController', 'getFichas');
 $router->addRoute('fichas/:id', 'GET',  'FichaApiController', 'getFicha');
