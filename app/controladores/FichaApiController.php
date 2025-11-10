@@ -43,17 +43,15 @@ class FichaApiController
   {
     $ficha_id = $req->params->id;
     $ficha = $this->modelo->get($ficha_id);
+
     if (!$ficha)
       {
         return $res->json("La ficha con el id=$ficha_id no existe", 404);
       }
 
-    if ($ficha){
-      $this->modelo->get($ficha_id);
-      $res->json("La ficha con el id=$ficha_id se elimino con éxito", 204);
-    }else{
-      $res->json("FIcha id=$ficha_id not found", 404);
-    }
+    $this->modelo->get($ficha_id);
+    $res->json("La ficha con el id=$ficha_id se elimino con éxito", 204);
+    
   }
   //------------------------METODO DELETE---------------------------
 
@@ -68,15 +66,16 @@ class FichaApiController
     
     $newLibro = $this->libroModelo->get($libro_id);
 
-    if($newLibro){
-      $ficha = $this->modelo->insert($usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado);
-      $res->json($ficha, 201); 
-    }else{
-      $res->json("No exite el libro con la id:$libro_id", 404);
+    if(!$newLibro){
+      return $res->json("No exite el libro con la id:$libro_id", 404);
     }
+
+    $ficha = $this->modelo->insert($usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado);
+    return $res->json($ficha, 201); 
    
   }
 
 //------------------------METODO POST---------------------------
 
 }
+
