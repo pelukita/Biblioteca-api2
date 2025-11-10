@@ -40,17 +40,24 @@ class LibroApiController
   public function deleteLibro($req, $res)
   {
     $libro_id = $req->params->id;
-    $libro = $this->modelo->getAll($libro_id);
+    $libro = $this->modelo->get($libro_id);
 
-    if ($libro){
+    if (!$libro)
+      {
+        return $res->json("El libro con el id=$libro_id no existe", 404);
+      }
+
+    if ($libro)
+      {
       $this->modelo->get($libro_id);
       $res->json("el libro con el id=$libro_id se elimino con éxito", 204);
-    }else{
-      $res->json("Libro id=$libro_id not found", 404);
+      }else{
+        $res->json("Libro id=$libro_id not found", 404);
     }
   }
   //------------------------METODO DELETE---------------------------
 
+//añadir lñibro
   public function insertLibro($req, $res)
   {
     // aca debe validar la entrada como cualquier controlador
@@ -61,10 +68,42 @@ class LibroApiController
     $stock = $req->body->stock;
 
     $libro = $this->modelo->insert($titulo, $autor, $fecha_publicaion, $genero, $stock);
-    $res->json($libro, 201); // buena practica devolver la tarea creada -(°v°)
+    $res->json($libro, 201); // buena practica devolver la objeto? creado -(°v°)
   }
 
 //------------------------METODO POST---------------------------
 
+//actualizar libro
+  public function updateLibro($req, $res)
+    {
+      $libro_id = $req->params->id;
+      $libro = $this->modelo->get($libro_id);
+  
+      if (!$libro) {
+          return $res->json("El libro con el id=$libro_id no existe", 404);
+      }
 
+      if (
+          empty($req->body->titulo) ||
+          empty($req->body->autor) ||
+          empty($req->body->fechaPublicacion) ||
+          empty($req->body->genero) ||
+          empty($req->body->stock)
+      ) {
+          return $res->json('Faltan datos', 400);
+      }
+
+      $titulo = $req->body->titulo;
+      $autor = $req->body->autor;
+      $fechaPublicacion = $req->body->fechaPublicacion;
+      $genero = $req->body->genero;
+      $stock = $req->body->stock;
+
+      $this->modelo->update($libro_id, $titulo, $autor, $fechaPublicacion, $genero, $stock);
+
+      $updatedLibro = $this->modelo->get($libro_id);
+      return $res->json($updatedLibro, 201); 
+    }
+
+//----------------------   METODO PUT---------------------------
 }

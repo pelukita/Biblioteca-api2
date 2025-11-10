@@ -41,4 +41,13 @@ class LibroApiModel
     return $this->db->lastInsertId();//vc: Returns the ID of the last inserted row or sequence value
   }
   
+  function update($id, $titulo, $autor, $fecha_publicacion, $genero, $stock) {
+      $query = $this->db->prepare(
+        " UPDATE libro 
+          SET titulo = ?, autor = ?, fecha_publicacion = ?, genero = ?, stock = ? 
+          WHERE id = ? 
+        ");
+
+      $query->execute([$titulo, $autor, $fecha_publicacion, $genero, $stock, $id]);
+  }
 }
