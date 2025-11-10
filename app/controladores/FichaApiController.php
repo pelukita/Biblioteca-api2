@@ -4,10 +4,12 @@ require_once 'app/modelos/FichaApiModel.php';
 class FichaApiController
 {
    private $modelo;
-
-  public function __construct()
+   private $libroModelo;
+   
+   public function __construct()
   {
     $this->modelo  = new FichaApiModel();
+    $this->libroModelo  = new LibroApiModel();
   }
 
   //obtener tdoso las Fichas
@@ -56,18 +58,22 @@ class FichaApiController
   //------------------------METODO DELETE---------------------------
 
   public function insertFicha($req, $res)
-  {
-
+  { 
+    
     $usuario_id = $req->body->usuario_id;
     $libro_id = $req->body->libro_id;
     $fecha_prestamo = $req->body->fecha_prestamo;
     $fecha_devolucion = $req->body->fecha_devolucion;
     $estado = $req->body->estado;
-
     
-    $ficha = $this->modelo->insert($usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado);
-    $res->json($ficha, 201);  
+    $newLibro = $this->libroModelo->get($libro_id);
 
+    if($newLibro){
+      $ficha = $this->modelo->insert($usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado);
+      $res->json($ficha, 201); 
+    }else{
+      $res->json("No exite el libro con la id:$libro_id", 404);
+    }
    
   }
 

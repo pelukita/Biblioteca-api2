@@ -49,7 +49,7 @@ class LibroApiController
 
     if ($libro)
       {
-      $this->modelo->get($libro_id);
+      $this->modelo->delete($libro_id);
       $res->json("el libro con el id=$libro_id se elimino con éxito", 204);
       }else{
         $res->json("Libro id=$libro_id not found", 404);
@@ -60,20 +60,19 @@ class LibroApiController
 //añadir lñibro
   public function insertLibro($req, $res)
   {
-    // aca debe validar la entrada como cualquier controlador
     $titulo = $req->body->titulo;
     $autor = $req->body->autor;
     $fecha_publicaion = $req->body->fecha_publicaion;
     $genero = $req->body->genero;
     $stock = $req->body->stock;
 
-    $libro = $this->modelo->insert($titulo, $autor, $fecha_publicaion, $genero, $stock);
-    $res->json($libro, 201); // buena practica devolver la objeto? creado -(°v°)
+    $libro_id = $this->modelo->insert($titulo, $autor, $fecha_publicaion, $genero, $stock);
+    $res->json($libro_id, 201); // buena practica devolver el ID creado -(°v°)?
   }
 
 //------------------------METODO POST---------------------------
 
-//actualizar libro
+//actualizar libro (similar al POST)
   public function updateLibro($req, $res)
     {
       $libro_id = $req->params->id;
@@ -86,7 +85,7 @@ class LibroApiController
       if (
           empty($req->body->titulo) ||
           empty($req->body->autor) ||
-          empty($req->body->fechaPublicacion) ||
+          empty($req->body->fecha_publicacion) ||
           empty($req->body->genero) ||
           empty($req->body->stock)
       ) {
@@ -95,11 +94,11 @@ class LibroApiController
 
       $titulo = $req->body->titulo;
       $autor = $req->body->autor;
-      $fechaPublicacion = $req->body->fechaPublicacion;
+      $fecha_publicacion = $req->body->fecha_publicacion;
       $genero = $req->body->genero;
       $stock = $req->body->stock;
 
-      $this->modelo->update($libro_id, $titulo, $autor, $fechaPublicacion, $genero, $stock);
+      $this->modelo->update($libro_id, $titulo, $autor, $fecha_publicacion, $genero, $stock);
 
       $updatedLibro = $this->modelo->get($libro_id);
       return $res->json($updatedLibro, 201); 
