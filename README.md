@@ -58,7 +58,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
     "fecha_publicacion": 1943,
     "genero": "Literatura infantil",
     "stock": 5
-}
+}'
 
 
 
@@ -102,7 +102,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 
 
 ### Crear Ficha (POST /fichas)
-json
+
 {
     "usuario_id": 123,
     "libro_id": 1,
