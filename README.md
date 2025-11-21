@@ -1,5 +1,5 @@
 API de Gestión de Biblioteca
-Integrantes:
+
 Elias Manuel Nuñez - tzanu007@gmail.com
 
 API REST para la gestión de libros y fichas de préstamos en una biblioteca. La API proporciona operaciones CRUD completas para administrar el catálogo de libros y el registro de préstamos, incluyendo funcionalidades de ordenamiento.
