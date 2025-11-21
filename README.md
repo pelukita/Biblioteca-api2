@@ -60,7 +60,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
     "stock": 5
 }
 
-### Crear Ficha (POST /fichas)
+## Crear Ficha (POST /fichas)
 ```json
 {
     "usuario_id": 123,
