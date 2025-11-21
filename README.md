@@ -51,7 +51,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 ## Ejemplos de Uso con JSON Body
 
 ### Crear Libro (POST /libros)
-```json
+
 {
     "titulo": "El Principito",
     "autor": "Antoine de Saint-Exupéry",
