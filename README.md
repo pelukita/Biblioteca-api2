@@ -50,7 +50,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 
 ## Ejemplos de Uso con JSON Body
 
-# Crear Ficha (POST /fichas)
+### Crear Ficha (POST /fichas)
 {
     "usuario_id": 123,
     "libro_id": 1,
