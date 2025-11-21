@@ -59,3 +59,13 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
     "genero": "Literatura infantil",
     "stock": 5
 }
+
+### Crear Ficha (POST /fichas)
+```json
+{
+    "usuario_id": 123,
+    "libro_id": 1,
+    "fecha_prestamo": "2024-01-15",
+    "fecha_devolucion": "2024-01-30",
+    "estado": "Prestado"
+}
