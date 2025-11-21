@@ -13,8 +13,14 @@ class LibroApiController
   //obtener tdoso los libros
   public function getLibros($req, $res)
   {
-      $Libros = $this->modelo->getAll();
-      return $res->json($Libros, 200);
+    // obtener parametros de ordenamiento
+    $orderBy = $req->query->orderBy ?? null;
+    $order = $req->query->order ?? 'ASC';
+    $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
+
+    // obvtener libros con ordenamiento
+    $libros = $this->modelo->getAll($orderBy, $order);
+    return $res->json($libros, 200);
   }
 
   //obtener libro por ID
@@ -47,26 +53,22 @@ class LibroApiController
         return $res->json("El libro con el id=$libro_id no existe", 404);
       }
 
-    if ($libro)
-      {
-      $this->modelo->delete($libro_id);
-      $res->json("el libro con el id=$libro_id se elimino con éxito", 204);
-      }else{
-        $res->json("Libro id=$libro_id not found", 404);
-    }
+    $this->modelo->delete($libro_id);
+    $res->json("el libro con el id= $libro_id se elimino con éxito", 204);
   }
   //------------------------METODO DELETE---------------------------
 
 //añadir lñibro
-  public function insertLibro($req, $res)
+  public function insertLibro($req, $res)  
   {
+
     $titulo = $req->body->titulo;
     $autor = $req->body->autor;
-    $fecha_publicaion = $req->body->fecha_publicaion;
+    $fecha_publicacion = $req->body->fecha_publicacion;
     $genero = $req->body->genero;
     $stock = $req->body->stock;
 
-    $libro_id = $this->modelo->insert($titulo, $autor, $fecha_publicaion, $genero, $stock);
+    $libro_id = $this->modelo->insert($titulo, $autor, $fecha_publicacion, $genero, $stock);
     $res->json($libro_id, 201); // buena practica devolver el ID creado -(°v°)?
   }
 
@@ -79,7 +81,7 @@ class LibroApiController
       $libro = $this->modelo->get($libro_id);
   
       if (!$libro) {
-          return $res->json("El libro con el id=$libro_id no existe", 404);
+          return $res->json("El libro con el id= $libro_id no existe", 404);
       }
 
       if (
@@ -88,7 +90,7 @@ class LibroApiController
           empty($req->body->fecha_publicacion) ||
           empty($req->body->genero) ||
           empty($req->body->stock)
-      ) {
+        ){
           return $res->json('Faltan datos', 400);
       }
 

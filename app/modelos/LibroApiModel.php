@@ -8,20 +8,28 @@ class LibroApiModel
     $this->db = new PDO('mysql:host=localhost;dbname=Biblioteca_db;charset=utf8', 'root', '');
   }
 
-  public function getAll()
+  public function getAll($orderBy = null, $order = 'ASC')
   {
-    $query = $this->db->prepare('SELECT * FROM libro');
+    $allowedFields = ['titulo', 'autor', 'fecha_publicacion', 'genero'];
+    $sql = 'SELECT * FROM libro';
+    
+    if ($orderBy && in_array($orderBy, $allowedFields))
+      {
+        $sql .= " ORDER BY $orderBy $order";
+      }
+    
+    $query = $this->db->prepare($sql);
     $query->execute([]);
-    $Libros = $query->fetchAll(PDO::FETCH_OBJ);
+    $libros = $query->fetchAll(PDO::FETCH_OBJ);
 
-    return $Libros;
+    return $libros;
   }
 
    public function get($id)
   {
     $query = $this->db->prepare('SELECT * FROM libro  WHERE id = ?');
     $query->execute([$id]);
-    $Libro = $query->fetchAll(PDO::FETCH_OBJ);
+    $Libro = $query->fetch(PDO::FETCH_OBJ);
 
     return $Libro;
   }

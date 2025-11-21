@@ -22,7 +22,7 @@ class FichaApiModel
   {
     $query = $this->db->prepare('SELECT * FROM ficha  WHERE id = ?');
     $query->execute([$id]);
-    $ficha = $query->fetchAll(PDO::FETCH_OBJ);
+    $ficha = $query->fetch(PDO::FETCH_OBJ);//fetchAll() no, usar fetch() ya que se espera un solo registro.
 
     return $ficha;
   }
@@ -42,4 +42,14 @@ class FichaApiModel
     return $this->db->lastInsertId();
   }
 
+  function update($id, $usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado) {
+    $query = $this->db->prepare(
+      'UPDATE ficha 
+      SET usuario_id = ?, libro_id = ?, fecha_prestamo = ?, fecha_devolucion = ?, estado = ?
+      WHERE id = ?'
+      );
+
+  
+      $query->execute([$usuario_id, $libro_id, $fecha_prestamo, $fecha_devolucion, $estado, $id]);
+  }
 }
