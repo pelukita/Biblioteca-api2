@@ -50,6 +50,15 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 
 ## Ejemplos de Uso con JSON Body
 
+# Crear Ficha (POST /fichas)
+{
+    "usuario_id": 123,
+    "libro_id": 1,
+    "fecha_prestamo": "2024-01-15",
+    "fecha_devolucion": "2024-01-30",
+    "estado": "Prestado"
+}
+
 ### Crear Libro (POST /libros)
 ```json
 {
@@ -58,13 +67,4 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
     "fecha_publicacion": 1943,
     "genero": "Literatura infantil",
     "stock": 5
-}
-
-# Crear Ficha (POST /fichas)
-{
-    "usuario_id": 123,
-    "libro_id": 1,
-    "fecha_prestamo": "2024-01-15",
-    "fecha_devolucion": "2024-01-30",
-    "estado": "Prestado"
 }
