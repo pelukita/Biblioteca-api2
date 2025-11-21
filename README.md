@@ -53,6 +53,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 ### Crear Libro (POST /libros)
 
 {
+
     "titulo": "El Principito",
     
     "autor": "Antoine de Saint-Exupéry",
@@ -68,6 +69,7 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
 ### Crear Ficha (POST /fichas)
 
 {
+
     "usuario_id": 123,
     
     "libro_id": 1,
