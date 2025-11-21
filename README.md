@@ -6,7 +6,7 @@ API REST para la gestión de libros y fichas de préstamos en una biblioteca. La
 
 ## Endpoints
 
-La URL base para todas las peticiones es `http://localhost/biblioteca/api/`
+La URL base para todas las peticiones es `http://localhost/Biblioteca-api2/api/`
 
 ### Libros
 
