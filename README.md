@@ -60,6 +60,47 @@ Todas las pruebas se pueden realizar utilizando Postman o cualquier cliente HTTP
     "stock": 5
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Crear Ficha (POST /fichas)
 json
 {
